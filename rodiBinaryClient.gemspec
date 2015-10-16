@@ -6,10 +6,10 @@ require 'rodiBinaryClient/version'
 Gem::Specification.new do |spec|
   spec.name          = "rodiBinaryClient"
   spec.version       = RodiBinaryClient::VERSION
-  spec.authors       = ["raul"]
+  spec.authors       = ["toriak"]
   spec.email         = ["raff.94.sma@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{Binary Client for RoDI}
+  spec.description   = %q{}
   spec.homepage      = ""
   spec.license       = "MIT"
 

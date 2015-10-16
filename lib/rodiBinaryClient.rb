@@ -26,10 +26,25 @@ module RodiBinaryClient
 		send 52
 	end
 
+	# --------- SERVO --------- #
+	def move_left_servo(speed)
+		send(53, [speed])
+	end
+	def move_right_servo(speed)
+		send(54, [speed])
+	end
+	def moves_servos(left_speed , right_speed)
+		send(55,[left_speed, right_speed])
+	end
+	def stop_servos
+		send(55,[0,0])
+	end
+	
+
 	private
 
-	def self.send(command)
-		payload = [command]
+	def send(command, parameters = [])
+		payload = [command] + parameters
 		@socket.write payload.pack('C*')
 	end
 
