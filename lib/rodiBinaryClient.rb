@@ -39,7 +39,17 @@ module RodiBinaryClient
 	def stop_servos
 		send(55,[0,0])
 	end
-	
+
+	# --------- TONE --------- #
+	#-- this method has a problem when the frequency is greater than 100000 --#
+	def play_tone(frequency)
+		high_byte = frequency >> 8
+		low_byte = frequency & 255
+		send(56, [high_byte, low_byte])
+	end
+	def clear_tone
+		send 57		
+	end
 
 	private
 
