@@ -51,6 +51,26 @@ module RodiBinaryClient
 		send 57		
 	end
 
+	# --------- IR --------- #
+	def read_both_ir
+		send 1
+		return read_unpack 4
+	end
+	def read_left_ir
+		send 2
+		return read_unpack 2
+	end
+	def read_right_ir
+		send 3
+		return read_unpack 2
+	end
+
+	# --------- SONAR --------- #
+	def read_sonar
+		send 4
+		return (read 2).ord
+	end
+
 	private
 
 	def send(command, parameters = [])
@@ -58,4 +78,11 @@ module RodiBinaryClient
 		@socket.write payload.pack('C*')
 	end
 
+	def read(count_bytes)
+		return @socket.recv count_bytes
+	end
+
+	def read_unpack(count_bytes)
+		return (read count_bytes).unpack('n*')
+	end
 end
