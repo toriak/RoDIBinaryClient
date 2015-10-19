@@ -27,62 +27,62 @@ module RodiBinaryClient
 	end
 
 	# --------- SERVO --------- #
-	def move_left_servo(speed)
+	def self.move_left_servo(speed)
 		send(53, [speed])
 	end
-	def move_right_servo(speed)
+	def self.move_right_servo(speed)
 		send(54, [speed])
 	end
-	def moves_servos(left_speed , right_speed)
+	def self.moves_servos(left_speed , right_speed)
 		send(55,[left_speed, right_speed])
 	end
-	def stop_servos
+	def self.stop_servos
 		send(55,[0,0])
 	end
 
 	# --------- TONE --------- #
 	#-- this method has a problem when the frequency is greater than 100000 --#
-	def play_tone(frequency)
+	def self.play_tone(frequency)
 		high_byte = frequency >> 8
 		low_byte = frequency & 255
 		send(56, [high_byte, low_byte])
 	end
-	def clear_tone
+	def self.clear_tone
 		send 57		
 	end
 
 	# --------- IR --------- #
-	def read_both_ir
+	def self.read_both_ir
 		send 1
 		return read_unpack 4
 	end
-	def read_left_ir
+	def self.read_left_ir
 		send 2
 		return read_unpack 2
 	end
-	def read_right_ir
+	def self.read_right_ir
 		send 3
 		return read_unpack 2
 	end
 
 	# --------- SONAR --------- #
-	def read_sonar
+	def self.read_sonar
 		send 4
 		return (read 2).ord
 	end
 
 	private
 
-	def send(command, parameters = [])
+	def self.send(command, parameters = [])
 		payload = [command] + parameters
 		@socket.write payload.pack('C*')
 	end
 
-	def read(count_bytes)
+	def self.read(count_bytes)
 		return @socket.recv count_bytes
 	end
 
-	def read_unpack(count_bytes)
+	def self.read_unpack(count_bytes)
 		return (read count_bytes).unpack('n*')
 	end
 end
