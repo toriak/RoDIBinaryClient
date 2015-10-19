@@ -1,12 +1,12 @@
 require "rodiBinaryClient/version"
 
-module RodiBinaryClient
+class RodiBinaryClient
   
 	def self.connect
 		@socket = TCPSocket.new(ip, port)
 	end
 	 
-	def self.desconnect
+	def self.disconnect
 		@socket.close
 	end
 
